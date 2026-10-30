@@ -34,7 +34,7 @@ export default function Workspace() {
   catch(e) { setError((e as Error).message); } finally { setLoading(false); }
  }
  useEffect(()=> { void load(); try {setContext(localStorage.getItem(`${KIND}-context`)||"");setSource(localStorage.getItem(`${KIND}-input`)||"");} catch {} },[]);
- useEffect(()=> {const warn=(e:BeforeUnloadEvent)=> {if(dirty){e.preventDefault();e.returnValue="";}};window.addEventListener("beforeunload",warn);return ()=>window.removeEventListener("beforeunload",warn);},[dirty]);
+ useEffect(()=> {const warn=(e:BeforeUnloadEvent)=> {if(dirty || source.trim().length > 0){e.preventDefault();e.returnValue="";}};window.addEventListener("beforeunload",warn);return ()=>window.removeEventListener("beforeunload",warn);},[dirty,source]);
  function leave() { if(busy)return false;return !dirty || window.confirm("Discard your unsaved changes?"); }
  function navigate(next: View) { if(!leave())return;setDirty(false);setView(next);setSelected(null);setError("");setNotice(""); }
  function select(r:RecordItem) {if(!leave())return;setSelected(structuredClone(r));setView("work");setDirty(false);setNotice("");setError("");}

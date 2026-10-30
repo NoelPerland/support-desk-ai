@@ -35,3 +35,13 @@ Deploy this repository as a Vercel Next.js project with Node 24. Configure `SUPA
 An editorial dispatch desk: warm white, graphite, restrained vermilion, IBM Plex Sans and mono ticket metadata. An inbox list and a separate review document keep the customer message and draft readable.
 
 Fonts are served by Google Fonts under their respective open font licenses; system fonts remain available when offline. Respect reduced-motion preferences. Native controls and dialogs support keyboard use. The app is designed for desktop and portrait mobile.
+
+## Portable browser regression
+
+Run `npm run build`, then `npm run test:browser` using Node24. The test starts/stops its own local production server and uses installed Google Chrome. Set `CHROME_PATH` to another Chromium executable when Chrome is not installed in its usual location. `playwright-core` is a development dependency; no browser download or credentials are required.
+
+Checks cover blocked browser storage, nonempty/empty draft leave warnings, failed generation preserving exact input and enabling retry. Portfolio also checks canceled discard. API responses are mocked; this does not verify live AI, database isolation, real account login, session renewal, email delivery, or physical devices. Registration remains disabled pending real confirmation-email verification.
+
+The regression also checks rejection of foreign-origin mutations. Standalone checks cover guest auth status, disabled registration and guest logout with backend credentials cleared. Real account login, refresh, isolation and email delivery remain release checklist items requiring authorized test accounts.
+
+Before enabling registration, verify an authorized existing test account can sign in, refresh an expired access token, and sign out; confirm a separate browser cannot read/edit its records and guest work never silently merges. Test confirmation-email delivery and follow the link before changing `ENABLE_SIGNUP`. These checks need real authorized accounts and are not claimed by the local regression.
