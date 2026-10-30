@@ -32,7 +32,7 @@ Deploy this repository as a Vercel Next.js project with Node 24. Configure `SUPA
 
 ## Design
 
-An editorial dispatch desk: warm white, graphite, restrained vermilion, IBM Plex Sans and mono ticket metadata. An inbox list and a separate review document keep the customer message and draft readable.
+An operational dispatch desk: graphite navigation, flat white ticket surfaces, restrained vermilion routing accents, IBM Plex Sans and mono metadata. The landing page shows a split request queue and reply review; the workspace uses a compact inbox/document layout, distinct from the spacious journal presentation of Minute to Action.
 
 Fonts are served by Google Fonts under their respective open font licenses; system fonts remain available when offline. Respect reduced-motion preferences. Native controls and dialogs support keyboard use. The app is designed for desktop and portrait mobile.
 
