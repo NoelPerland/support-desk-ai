@@ -49,7 +49,12 @@ try {
   const warns = () => page.evaluate(() => { const event = new Event("beforeunload", { cancelable: true }); window.dispatchEvent(event); return event.defaultPrevented; });
   for (const path of portfolio ? ["/projects/support-desk", "/projects/meeting-notes"] : ["/workspace"]) {
     await page.goto(base + path);
-    if (!portfolio) await page.locator(".compose-button").click();
+    if (!portfolio) {
+      const firstAction = page.locator(".record-list .list-message button");
+      await firstAction.waitFor();
+      assert.match(await firstAction.textContent(), /^New (meeting|ticket)/);
+      await firstAction.click();
+    }
     const input = page.locator(portfolio ? "#source" : ".compose-sheet textarea");
     const draft = "Draft text must survive a failed provider request and unavailable storage.";
     await input.fill(draft);
